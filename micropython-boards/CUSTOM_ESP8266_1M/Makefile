@@ -1,4 +1,4 @@
-# Makefile for custom MicroPython stm32 board.
+# Makefile for custom MicroPython ESP8266 board.
 
 ################################################################################
 # Define your settings here.
@@ -29,4 +29,3 @@ firmware:
 		BOARD=$(BOARD) \
 		BOARD_DIR=$(BOARD_DIR) \
 		BUILD=$(BUILD)
-

@@ -17,9 +17,10 @@ Build MicroPython's mpy-cross:
 docker run --rm -v $(pwd):$(pwd) -w $(pwd) larsks/esp-open-sdk make -C micropython/mpy-cross
 ```
 
-Build the project:
+Build the project using the [larsks/esp-open-sdk](https://hub.docker.com/r/larsks/esp-open-sdk)
+docker image:
 ```bash
-docker run --rm -v $(pwd):$(pwd) -w $(pwd)/boards/CUSTOM_ESP8266_1M larsks/esp-open-sdk make
+docker run --rm -v $(pwd):$(pwd) -w $(pwd)/micropython-boards/CUSTOM_ESP8266_1M larsks/esp-open-sdk make
 ```
 
 Load:
