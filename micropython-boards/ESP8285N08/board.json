@@ -6,10 +6,10 @@
     "features": [
         "WiFi"
     ],
-    "id": "custom-esp8266-1m",
+    "id": "esp8285n08",
     "images": [],
     "mcu": "esp8266",
-    "product": "Custom ESP8266 board with 1MiB flash",
+    "product": "ESP8285, an ESP8266 MCU with built-in 1MiB flash",
     "thumbnail": "",
     "url": "https://www.espressif.com/en/products/modules",
     "vendor": "Espressif"

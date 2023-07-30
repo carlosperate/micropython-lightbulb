@@ -1,10 +1,10 @@
-# Makefile for custom MicroPython ESP8266 board.
+# Makefile for MicroPython ESP8285N08 board.
 
 ################################################################################
 # Define your settings here.
 
 # The board name.
-BOARD ?= CUSTOM_ESP8266_1M
+BOARD ?= GENERIC_ESP8285H16
 
 # Location of MicroPython repository.
 MICROPY_TOP ?= $(abspath ../../micropython)

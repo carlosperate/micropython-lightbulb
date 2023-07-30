@@ -1,0 +1,16 @@
+{
+    "deploy": [
+        "deploy.md"
+    ],
+    "docs": "",
+    "features": [
+        "WiFi"
+    ],
+    "id": "esp8285h16",
+    "images": [],
+    "mcu": "esp8266",
+    "product": "ESP8285, an ESP8266 MCU with built-in 2MiB flash",
+    "thumbnail": "",
+    "url": "https://www.espressif.com/en/products/modules",
+    "vendor": "Espressif"
+}
