@@ -19,14 +19,21 @@ docker run --rm -v $(pwd):$(pwd) -w $(pwd) larsks/esp-open-sdk make -C micropyth
 
 Build the project using the [larsks/esp-open-sdk](https://hub.docker.com/r/larsks/esp-open-sdk)
 docker image:
+
 ```bash
 docker run --rm -v $(pwd):$(pwd) -w $(pwd)/micropython-boards/ESP8285H16 larsks/esp-open-sdk make
 ```
 
 Load:
+
 ```bash
-python tools/esptool/esptool.py --port /dev/tty.usbserial-1440 erase_flash
+python tools/esptool/esptool.py --port /dev/tty.usbserial-142120 erase_flash
 ```
+
 ```bash
-python tools/esptool/esptool.py --port /dev/tty.usbserial-1440 --baud 1000000 write_flash --verify --flash_size=4MB -fm dio 0 micropython-boards/ESP8285H16/build/firmware-combined.bin
+python tools/esptool/esptool.py --port /dev/tty.usbserial-142120 --baud 1000000 write_flash --verify --flash_size=2MB -fm dio 0 micropython-boards/ESP8285H16/build/firmware-combined.bin
+```
+
+```bash
+python micropython/tools/mpremote/mpremote.py fs cp src/main.py :main.py
 ```
