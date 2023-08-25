@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>MicroPython Lightbulb</title>
+</head>
+<body>
+    <p>Select lightbulb colour:</p>
+    <div>
+        <input type="color" id="lightColour" name="lightColour" value="#6686e6" />
+        <label for="lightColour">RGB</label>
+    </div>
+    <script>
+        function updateBulbColour(event) {
+            let colour = event.target.value;
+            console.log("color: " + colour);
+            const r = parseInt(colour.substr(1,2), 16)
+            const g = parseInt(colour.substr(3,2), 16)
+            const b = parseInt(colour.substr(5,2), 16)
+
+            fetch('/colour', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    "r": r,
+                    "g": g,
+                    "b": b,
+                    "wc": 0,
+                    "ww": 0,
+                })
+            }).then((response) => {
+                if (response.json().success == true) {
+                    // All good
+                } else {
+                    // error
+                }
+            });
+        }
+
+        window.addEventListener("load", () => {
+            let colourPicker = document.querySelector("#lightColour");
+            colourPicker.addEventListener("input", updateBulbColour, false);
+            colourPicker.addEventListener("change", updateBulbColour, false);
+        }, false);
+    </script>
+</body>
+</html>
