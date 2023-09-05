@@ -52,5 +52,5 @@ def flash():
 
     for pwm_pin in all_pwm_pins:
         pwm_pin.duty(1024)
-        time.sleep_ms(1000)
+        time.sleep(1)
         pwm_pin.duty(0)

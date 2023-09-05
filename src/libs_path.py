@@ -1,5 +1,9 @@
 import sys
 import os
 
-libs_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'libs/')
-sys.path.append(libs_path)
+if hasattr(sys, "implementation") and sys.implementation.name == "micropython":
+    sys.path.append('libs/')
+else:
+    sys.path.append(
+        os.path.join(os.path.abspath(os.path.dirname(__file__)), 'libs/')
+    )
