@@ -37,12 +37,10 @@ python tools/esptool/esptool.py --port /dev/tty.usbserial-142120 --baud 1000000 
 ```bash
 python micropython/tools/mpremote/mpremote.py fs cp src/boot.py :boot.py
 python micropython/tools/mpremote/mpremote.py fs cp src/leds.py :leds.py
-python micropython/tools/mpremote/mpremote.py fs cp src/libs_path.py :libs_path.py
+python micropython/tools/mpremote/mpremote.py fs cp src/lib_path.py :lib_path.py
 python micropython/tools/mpremote/mpremote.py fs cp src/main.py :main.py
 python micropython/tools/mpremote/mpremote.py fs mkdir static
 python micropython/tools/mpremote/mpremote.py fs cp src/static/index.html :static/index.html
-python micropython/tools/mpremote/mpremote.py fs mkdir libs
-python micropython/tools/mpremote/mpremote.py fs cp src/libs/microdot.mpy :libs/microdot.mpy
 ```
 
 mpy:
@@ -52,5 +50,7 @@ make -C micropython/mpy-cross/
 ```
 
 ```bash
-./micropython/mpy-cross/build/mpy-cross -o src/libs/microdot.mpy src/libs/microdot.py
+./micropython/mpy-cross/build/mpy-cross -o src/lib/microdot.mpy src/lib/microdot.py
+python micropython/tools/mpremote/mpremote.py fs mkdir lib
+python micropython/tools/mpremote/mpremote.py fs cp src/lib/microdot.mpy :lib/microdot.mpy
 ```

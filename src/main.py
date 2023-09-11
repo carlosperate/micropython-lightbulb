@@ -1,4 +1,4 @@
-import libs_path
+import lib_path
 from microdot import Microdot, send_file
 import time
 import leds
