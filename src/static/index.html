@@ -1,39 +1,60 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>MicroPython Lightbulb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <h1>MicroPython Lightbulb</h1>
     <p>Select lightbulb colour:</p>
     <div>
         <input type="color" id="lightColour" name="lightColour" value="#6686e6" />
         <label for="lightColour">RGB</label>
     </div>
     <script>
-        function updateBulbColour(event) {
-            let colour = event.target.value;
-            console.log("color: " + colour);
-            const r = parseInt(colour.substr(1,2), 16)
-            const g = parseInt(colour.substr(3,2), 16)
-            const b = parseInt(colour.substr(5,2), 16)
-
-            fetch('/colour', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
+        function sendBulbRequest(r, g, b) {
+            fetch("/colour", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
                     "r": r,
                     "g": g,
                     "b": b,
                     "wc": 0,
                     "ww": 0,
                 })
-            }).then((response) => {
-                if (response.json().success == true) {
-                    // All good
-                } else {
-                    // error
+            }).then(response => {
+                if (response.status !== 200 ) {
+                    console.error("Error response from server: ", response);
                 }
+                return response.json();
+            }).then(responseJson => {
+                if (responseJson.success && responseJson.success === true) {
+                    console.log(`Successfully sent bulb color r[${r}] g[${g}] b[${b}]`);
+                } else {
+                    console.error("Error response from server: ", responseJson);
+                }
+            }).catch(error => {
+                console.error("The was an error sending bulb request: ", error);
             });
+        };
+
+
+        let nextBulbRequestTime = Date.now();
+        function updateBulbColour(event) {
+            let colour = event.target.value;
+            const r = parseInt(colour.substr(1,2), 16);
+            const g = parseInt(colour.substr(3,2), 16);
+            const b = parseInt(colour.substr(5,2), 16);
+            console.log(`colour[${colour}] r[${r}] g[${g}] b[${b}]`);
+
+            if (Date.now() > nextBulbRequestTime) {
+                nextBulbRequestTime = Date.now() + 200;
+                sendBulbRequest(r, g, b);
+            }
         }
+
 
         window.addEventListener("load", () => {
             let colourPicker = document.querySelector("#lightColour");
